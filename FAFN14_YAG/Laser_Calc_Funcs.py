@@ -16,30 +16,42 @@ def Func_E_Cap(C,V):
 
 E_Cap = Func_E_Cap(C,V_pump)
 
-dur = {'IR_nQ':[],
-       'IR_Q':[],
-       '532_Q':[]} 
+dur = {'IR_nQ':np.array([1]),
+       'IR_Q':np.array([1]),
+       '532_Q':np.array([1])} 
 
-pow_av = {'IR_nQ':[5],
-          'IR_Q':[10],
-          '532_Q':[33]} 
+pow_av = {'IR_nQ':np.array([1]),
+          'IR_Q':np.array([1]),
+          '532_Q':np.array([1])} 
 
-E_pulse  = {'IR_nQ':[],
-            'IR_Q':[],
-            '532_Q':[]} 
+E_pulse  = {'IR_nQ':np.array([1]),
+            'IR_Q':np.array([1]),
+            '532_Q':np.array([1])} 
 
-eff = {'IR_nQ':[],
-       'IR_Q':[],
-       '532_Q':[]} 
+eff = {'IR_nQ':np.array([1]),
+       'IR_Q':np.array([1]),
+       '532_Q':np.array([1])} 
 
-pow_peak = {'IR_nQ':[],
-            'IR_Q':[],
-            '532_Q':[]} 
+pow_peak = {'IR_nQ':np.array([1]),
+            'IR_Q':np.array([1]),
+            '532_Q':np.array([1])} 
+
+t_FWHM = {'IR_nQ':np.array([1]),
+            'IR_Q':np.array([1]),
+            '532_Q':np.array([1])} 
+
+LT = ['IR_nQ','IR_Q','532_Q'] 
+
+f_prof = 0.94
+
+def Func_PeakPow(t_FWHM, f_prof, E_p):
+    
+    P_p = f_prof*E_p/t_FWHM
+    
+    return(P_p)
 
 
-def Func_E_(C,V):
-    E_cap  = C*np.power(V,2)/2
-    return(E_cap)
+for cond in LT:
+    pow_peak[cond] = Func_PeakPow(t_FWHM[cond], f_prof, [0])
 
-def Func_L_Input():
-    None
+    
