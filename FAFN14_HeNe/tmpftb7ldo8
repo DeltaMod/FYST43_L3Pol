@@ -31,10 +31,8 @@ def Dupsilon(z_0,z_1,z_2,Dq,Dlm,ups):
 
 
 z =z012(d,R_1,R_2)  
-z['z_0'] = d
-#z['z_1'] = -d/2
-#z['z_2'] = d/2
 print('\nExercise 4\n ======================')
+print(z)
 
 dvups = dfreq(c,n,d)
 
