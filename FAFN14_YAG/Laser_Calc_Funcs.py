@@ -51,13 +51,13 @@ data['IR_NQ']['t_FWHM'] = np.array([194.05*10])*10**-9
 data['IR_Q']['LT'] =  np.array([0.94*10**3])
 data['IR_Q']['V_pump']  = np.array([0.94,0.95,1.0,1.05,1.1,1.15, 1.2, 1.25, 1.3, 1.35, 1.4,1.45,1.5  ])   * 10**3 #V
 data['IR_Q']['pow_avg'] = np.array([7.5, 95.6,298,522,728, 965, 1195,1478, 1701,1975,2204,2470, 2700   ]) * 10**-3
-data['IR_Q']['t_FWHM'] = np.array([27.9])*10**-9
-data['IR_Q']['duration'] = np.array([ ])*10**-9
+data['IR_Q']['t_FWHM'] = np.array([27.9])*10**-9 #s
+data['IR_Q']['duration'] = np.array([ ])*10**-9 #s
 
 data['532_Q']['LT'] =  np.array([0.91*10**3])
 data['532_Q']['V_pump']  = np.array([1.2,1.5  ])*10**3
 data['532_Q']['pow_avg'] = np.array([260 , 680 ])*10**-3
-data['532_Q']['t_FWHM'] = np.array([ 17.25  b])*10**-9
+data['532_Q']['t_FWHM'] = np.array([ 17.25 ])*10**-9
 
 #note: we get approx a 25% ratio between this q switching and the original, so the original should be reduced by about 25%
 #if we measure the zero rystal, we got 2000 ish, which is aout 0.75% from 2700 MW 

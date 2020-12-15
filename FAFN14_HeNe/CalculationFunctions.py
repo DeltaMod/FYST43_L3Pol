@@ -15,8 +15,16 @@ R_2 = -1
 def z012(d,R_1,R_2):
     if R_1 == R_2:
         z_0 = d/2 * np.sqrt( 2 * abs(R_2)/d - 1)
-    elif R_1 != R_2:
+    elif R_1 != R_2 and R_1 !=np.inf and R_2 !=np.inf:
         z_0 = np.sqrt( (-d*(R_1 + d)*(R_2 + d)*(R_1 +R_2+ d))/((R_2+R_1+2*d)**2) )
+    elif R_1 == np.inf or R_2 == np.inf:
+        if R_1 ==  np.inf:
+            R = R_2
+
+        else:
+
+            R = R_1
+        z_0 = np.sqrt(-d*(R+d))
     z_1 = (-d*(R_2+d))/(R_2+R_1 +2*d)
     z_2 = z_1 + d
     return({'z_0':z_0,'z_1':z_1,'z_2':z_2,'R_1':R_1,'R_2':R_2,'d':d})
@@ -31,9 +39,7 @@ def Dupsilon(z_0,z_1,z_2,Dq,Dlm,ups):
 
 
 z =z012(d,R_1,R_2)  
-z['z_0'] = d
-#z['z_1'] = -d/2
-#z['z_2'] = d/2
+
 print('\nExercise 4\n ======================')
 
 dvups = dfreq(c,n,d)
@@ -65,20 +71,24 @@ def ResPow2(lamb,d,**kwargs):
         n1 =  kwargs['n1']
         n0 = kwargs['n0']
         R     =  (n0-n1)**2/(n0+n1)**2
-        r     =  R*R
+        r     =  np.sqrt(R*R)
     if 'r' in kwargs.keys():
         r = kwargs['r']
+        n0 = 1
+        n1 = 1
         
-    F     =  ( np.pi*np.sqrt(abs(r))) / (1- np.sqrt(abs(r)))
-    P_res =  np.pi/2 * 2*d/lambd * np.sqrt(F)
-    return({'r':r,'F':F,'P_res':P_res})
+    F     =  ( np.pi*np.sqrt(abs(r))) / (1- abs(r))
+    P_res =  np.pi/2 * 2*d/lamb * np.sqrt(F)
+    
+    return({'nonF':P_res/F,'r':r,'F':F,'P_res':P_res})
 
+ex5lam = 633e-9 
 print('\nExercise 5 \n ======================')
-P_res_a = ResPow2(lambd,10**-3,n0=1,n1=1.5)
+P_res_a = ResPow2(ex5lam,10e-3,n1 = 1.5, n0 = 1)
 print(P_res_a)
-P_res_b = ResPow2(lambd,0.05,r=0.85)
+P_res_b = ResPow2(ex5lam,0.05,r=0.85)
 print(P_res_b)
-P = ResPow(lambd,n1,n2,10**-3)
+P = ResPow(ex5lam,n1,n2,10**-3)
 
 print(P)
 
@@ -97,14 +107,17 @@ Deff = DiodeEff(530e-6,1.325e-3,h,c,632.9e-9)
 T1_k  = 0.017
 T1_uk = 0.012
 T2_p  = 0.012 
-
+L1 = 0.45
+L2 = 0.57
 
 def MGain(T1,T2,L):
     tot = 1
     tot = tot*T1
-    tot = tot*t2
+    tot = tot*T2
     loss = tot/(2*L)
     
     return(loss)
 
-MedGain = MGain(T1_k,T2_p,L)
+MedGain_k = MGain(T1_k,T2_p,L1)
+
+MedGain_uk = MGain(T1_uk,T2_p,L2)
