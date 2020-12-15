@@ -5,7 +5,7 @@ Created on Thu Dec  3 23:12:07 2020
 Github: https://github.com/DeltaMod
 """
 import numpy as np
-from scipy.constants import c
+from scipy.constants import c,e,h
 import sympy
 n = 1
 d = 0.4
@@ -87,3 +87,24 @@ def LasingPow(I,Wp):
 
 def RCalc(d,g_1):
     return(1/(1/d - g_1/d))
+
+def DiodeEff(Pe,Pp,h,c,lambd):
+    return((Pe/e)/(Pp*lambd/(h*c)))
+
+
+Deff = DiodeEff(530e-6,1.325e-3,h,c,632.9e-9)
+
+T1_k  = 0.017
+T1_uk = 0.012
+T2_p  = 0.012 
+
+
+def MGain(T1,T2,L):
+    tot = 1
+    tot = tot*T1
+    tot = tot*t2
+    loss = tot/(2*L)
+    
+    return(loss)
+
+MedGain = MGain(T1_k,T2_p,L)
