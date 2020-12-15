@@ -4,6 +4,8 @@ Created on Thu Dec 10 17:15:14 2020
 @authors: Vidar and Isa
 """
 import numpy as np
+import matplotlib
+from matplotlib import pyplot as plt
 
 C = 30*10**-6 #F  
 V_pump = [5,23,4,23,25,26] #kV
@@ -105,4 +107,17 @@ for key in data.keys():
         print(subkey+"".join(pad)+str(data[key][subkey]))
 
 E_burn = Func_EToBurn(M['Steel']['EV'],15.9*10**-6,0.001,M['Steel']['MD'])    
+
+
+#Example of Figure Plotting
+fig = plt.figure(1) # This ensures you can plot over the old figure
+fig.clf()           # This clears the old figure
+
+#2D plot
+ax1 = fig.gca()
+ax1.set_xlabel('$V_{pump}$ [V]')
+ax1.set_ylabel('Efficiency')
+ax1.plot(data['IR_NQ']['V_pump'],data['IR_NQ']['eff'],'r')
+fig.tight_layout()
+ax1.grid(True)
 
